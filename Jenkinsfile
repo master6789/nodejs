@@ -14,14 +14,6 @@ node {
         app = docker.build("getintodevops-hellonode")
     }
 
-    stage('Test image') {
-                
-          npm install
-          {
-            sh 'echo "Tests passed"'      
-          }     
-    }
-
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
