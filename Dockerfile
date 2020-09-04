@@ -1,16 +1,17 @@
 # use a node base image
-FROM node:7-onbuild
-WORKDIR /usr/src/app/
-VOLUME /usr/src/app/
+FROM node:12.4.0-alpine as debug
+WORKDIR /work/
+COPY ./src/package.json /work/package.json
+RUN npm install
+RUN npm install -g nodemon
+copy ./src/ /work/src/
+ENTRYPOINT ["nodemon","--inspect=0.0.0.0","./src/server.js"]
 
-# set maintainer
-LABEL maintainer "traitor6789@gmail.com"
-
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
-
-# tell docker what port to expose
+FROM node:12.4.0-alpine as prod
+WORKDIR /work/
+COPY ./src/package.json /work/package.json
+RUN npm install
+copy ./src/ /work/src/
 EXPOSE 8000
+CMD node.
 
