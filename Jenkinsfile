@@ -17,10 +17,10 @@ node {
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-
-        {
-            sh 'echo "Tests passed"'
-        }
+        
+        docker run -it -p 8000:8000 getintodevops-hellonode:1
+        curl http://127.0.0.1:8000
+        
     }
 
     stage('Push image') {
