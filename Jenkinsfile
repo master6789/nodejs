@@ -18,8 +18,9 @@ node {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
         
-        curl http://127.0.0.1:8000
-        
+          app.inside {
+            sh 'echo "Tests passed"'      
+          }     
     }
 
     stage('Push image') {
