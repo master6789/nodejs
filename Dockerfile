@@ -1,8 +1,6 @@
 # use a node base image
 FROM node:7-onbuild
 WORKDIR /usr/src/app/
-COPY requirements.txt ./
-COPY . .
 VOLUME /usr/src/app/
 
 # set maintainer
